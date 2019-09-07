@@ -1,0 +1,119 @@
+.App {
+  height: 100vh;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.ant-modal-body {
+  height: 65vh;
+}
+
+.App-link {
+  color: #61dafb;
+}
+#map {
+  height: 100%;
+}
+.c-layout {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.c-sideview--collapse {
+  flex-basis: 25%;
+}
+.c-sideview--expanded {
+  flex-basis: 45%;
+}
+.c-mapview--collapse {
+  flex-basis: 55%;
+}
+.c-mapview--expanded {
+  flex-basis: 75%;
+}
+.c-sideview {
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.c-add-marker {
+  border-bottom: solid 1px #d0d0d094;
+  padding-bottom: 1rem;
+}
+.c-add-marker__btn {
+  padding: 1rem;
+  background: #080896;
+  color: white;
+  font-size: 12px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  margin: 3px;
+}
+.c-list {
+  display: flex;
+  flex-direction: row;
+  padding: 50px 10px 10px 10px;
+  flex-wrap: wrap;
+  overflow: auto;
+  max-height: calc(100% - 100px);
+}
+.c-list__card {
+  max-width: 250px;
+  padding: 5px;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+.c-list__card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 26px;
+}
+.c-list__card > header {
+  font-size: 22px;
+  color: #006dff;
+}
+.cursor-zoom {
+  cursor: zoom-in;
+}
+.c-list__card > footer button {
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: #f3f2f2;
+  outline: none;
+}
+.c-list__card > footer > span {
+  padding: 5px;
+}
+.c-loading {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
