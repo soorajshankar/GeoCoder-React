@@ -1,9 +1,7 @@
 import React, { PureComponent } from "react";
 import { appContext } from "../../appContext";
-import MarkerModal from "../markerModal";
 import { loadJS, renderMap, addMarkersToMap } from "../../helpers/map-helpers";
 import PropTypes from "prop-types";
-import { VIEWMODES, MARKERMODES } from "../../constants";
 import { getProviderLibUrl, PROVIDERS } from "../../config/appConfig";
 
 /**
@@ -47,7 +45,8 @@ export class GenericMap extends PureComponent {
       }
     }
     if (!Object.is(this.props.focusLocation, prevProps.focusLocation)) {
-      this.context.mapInstance.setCenter(this.props.focusLocation);
+      this.context.mapInstance &&
+        this.context.mapInstance.setCenter(this.props.focusLocation);
     }
   }
   initMap = () => {

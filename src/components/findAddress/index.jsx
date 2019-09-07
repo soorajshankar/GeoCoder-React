@@ -21,7 +21,7 @@ export const FindAddress = props => {
   const [isFetching, setIsFetching] = useState(false);
   const onSearch = () => {
     searchValue &&
-      this.props.searchAddress(searchValue).then((resp, err) => {
+      props.searchAddress(searchValue).then((resp, err) => {
         setIsFetching(false);
         if (err) return;
         setSuggestions(resp.data.data || []);

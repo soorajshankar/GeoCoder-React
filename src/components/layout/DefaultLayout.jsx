@@ -31,7 +31,10 @@ export class DefaultLayout extends Component {
     getAllMarkers()
       .then(res => {
         if (res.status === 200) {
-          this.setState({ markers: res.data });
+          this.setState({
+            markers: res.data || [], // set markers or default null array
+            focusLoc: res.data[0] || FOCUS_LOC // Pan to the first marker right after the markers are loaded
+          });
         }
       })
       .catch(err => console.error("Axios Error :", err));
