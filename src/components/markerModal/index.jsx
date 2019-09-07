@@ -48,27 +48,21 @@ export const MarkerModal = props => {
       }
       onCancel={props.onCancel}
     >
-      <Form {...formItemLayout}>
-        <article className="c-list__card">
-          <Form.Item label="Name">
-            <Input
-              placeholder="Name this marker"
-              value={name}
-              onChange={e => setName(e.target.value)}
-            />
-          </Form.Item>
-          {/* <p>subtitle</p> */}
-          <Form.Item label="Latitude">
-            <Input value={lat} onChange={e => setlat(e.target.value)} />
-          </Form.Item>
-          <Form.Item label="Longitude" er>
-            <Input value={lng} onChange={e => setlng(e.target.value)} />
-          </Form.Item>
-          {validationMessage && (
-            <Alert message={validationMessage} type="error" />
-          )}
-        </article>
-      </Form>
+      <Form.Item label="Name">
+        <Input
+          placeholder="Name this marker"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+      </Form.Item>
+      {/* <p>subtitle</p> */}
+      <Form.Item label="Latitude">
+        <Input value={lat} onChange={e => setlat(e.target.value)} />
+      </Form.Item>
+      <Form.Item label="Longitude" er>
+        <Input value={lng} onChange={e => setlng(e.target.value)} />
+      </Form.Item>
+      {validationMessage && <Alert message={validationMessage} type="error" />}
     </Modal>
   );
 };
