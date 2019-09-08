@@ -4,16 +4,18 @@ import { COUNTRY_CODES } from "../../helpers/map-helpers";
 const InputGroup = Input.Group;
 const { Option } = Select;
 /**
- * ### Marker Modal - Functional Component
+ * ### Find Address Modal - Functional Component
  * Reusable component as addMarker/EditMarker
  * # Props
- * @marker : marker object needs to be edited/added in shape of {name,lat,lng}
- * @mode : defines add mode or edit mode (from constant enum MARKERMODES)
+ * @edittingMarker : marker object if the component is mounted as edit mode
+ * @searchAddress : Promise which will validate the address. accepts (address,country) as arguments
  *
  * # React Hooks
- * @name ,
- * @lat ,
- * @lng : form data
+ * @searchValue
+ * @suggestions
+ * @validationMessage
+ * @isFetching
+ * @country
  *
  */
 export const FindAddress = props => {
