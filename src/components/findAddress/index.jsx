@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Modal, Input, Button, Row, Col, Card, Alert } from "antd";
-
+import { Modal, Input, Button, Row, Col, Card, Alert, Select } from "antd";
+import { COUNTRY_CODES } from "../../helpers/map-helpers";
+const InputGroup = Input.Group;
+const { Option } = Select;
 /**
  * ### Marker Modal - Functional Component
  * Reusable component as addMarker/EditMarker
@@ -15,13 +17,21 @@ import { Modal, Input, Button, Row, Col, Card, Alert } from "antd";
  *
  */
 export const FindAddress = props => {
-  const [searchValue, setsearchValue] = useState(undefined);
-  const [suggestions, setSuggestions] = useState([]);
+  const { edittingMarker } = props;
+  const [searchValue, setsearchValue] = useState(
+    (edittingMarker && edittingMarker.name) || undefined
+  );
+  const [suggestions, setSuggestions] = useState(
+    (edittingMarker && [edittingMarker]) || []
+  );
   const [validationMessage, setvalidationMessage] = useState(undefined);
   const [isFetching, setIsFetching] = useState(false);
+  const [country, setCountry] = useState(
+    (edittingMarker && edittingMarker.country) || "DE"
+  );
   const onSearch = () => {
     searchValue &&
-      props.searchAddress(searchValue).then((resp, err) => {
+      props.searchAddress(searchValue, country).then((resp, err) => {
         setIsFetching(false);
         if (err) return;
         setSuggestions(resp.data.data || []);
@@ -46,12 +56,20 @@ export const FindAddress = props => {
     >
       <Row>
         <Col span={19}>
-          <Input
-            placeholder="Search address here.."
-            value={searchValue}
-            onChange={e => setsearchValue(e.target.value)}
-            onKeyDown={onEnterSearch}
-          />
+          <InputGroup compact>
+            <Select defaultValue={country} onChange={setCountry}>
+              {COUNTRY_CODES.map(i => (
+                <Select.Option value={i.code}>{i.name}</Select.Option>
+              ))}
+            </Select>
+            <Input
+              style={{ width: "60%" }}
+              placeholder="Search address here.."
+              value={searchValue}
+              onChange={e => setsearchValue(e.target.value)}
+              onKeyDown={onEnterSearch}
+            />
+          </InputGroup>
         </Col>
         <Col span={5}>
           <Button
@@ -59,7 +77,7 @@ export const FindAddress = props => {
             icon={isFetching && "loading"}
             onClick={onSearch}
           >
-            Search
+            Look Up
           </Button>
         </Col>
       </Row>
@@ -70,7 +88,9 @@ export const FindAddress = props => {
             <p>lat :{item.lat}</p>
             <p>lng :{item.lng}</p>
             <footer>
-              <button onClick={() => props.onSubmit(item)}>Add to Map</button>
+              <button onClick={() => props.onSubmit(item, edittingMarker)}>
+                {edittingMarker ? "Update Marker" : "Add to Map"}
+              </button>
             </footer>
           </article>
         ))}

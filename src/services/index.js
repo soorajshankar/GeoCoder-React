@@ -4,8 +4,11 @@ import { config } from "../config/appConfig";
 const { serviceUrls } = config;
 
 //Search Address
-export const searchAddress = address => {
-  return axios.get(`${serviceUrls.geoCoder}/${address}`);
+export const searchAddress = (address, country) => {
+  return axios.get(
+    `${serviceUrls.geoCoder}/${address}/${country}`
+    // `${serviceUrls.geoCoder}/${address}&components=country:${country}`
+  );
 };
 
 //Get All markers

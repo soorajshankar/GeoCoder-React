@@ -114,16 +114,26 @@ export class DefaultLayout extends Component {
             />
           )}
           {viewMode === VIEWMODES.EDIT_MODE && edittingMarker && (
-            <MarkerModal
-              marker={edittingMarker}
-              onSubmit={this.onEditConfirm}
-              onCancel={() =>
-                this.setState({
-                  viewMode: VIEWMODES.NORMAL_MODE,
-                  edittingMarker: undefined
-                })
-              }
+            <FindAddress
+              edittingMarker={edittingMarker}
+              searchAddress={searchAddress} //ensuring component is not having side effects
+              onClose={() => this.setState({ viewMode: VIEWMODES.NORMAL_MODE })}
+              onSubmit={item => {
+                console.log({ item, edittingMarker });
+                this.onEditConfirm({ ...edittingMarker, ...item });
+              }}
             />
+
+            // <MarkerModal
+            //   marker={edittingMarker}
+            //   onSubmit={this.onEditConfirm}
+            //   onCancel={() =>
+            //     this.setState({
+            //       viewMode: VIEWMODES.NORMAL_MODE,
+            //       edittingMarker: undefined
+            //     })
+            //   }
+            // />
           )}
         </div>
       </React.Fragment>
