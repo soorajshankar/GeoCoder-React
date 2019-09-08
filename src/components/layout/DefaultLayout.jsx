@@ -11,9 +11,10 @@ import {
   editMarker,
   searchAddress
 } from "../../services";
-import { VIEWMODES, FOCUS_LOC } from "../../constants";
+import { VIEWMODES, FOCUS_LOC, NOTIFICATION_TYPES } from "../../constants";
 import { config } from "../../config/appConfig";
 import FindAddress from "../findAddress";
+import { notification, message } from "antd";
 
 export class DefaultLayout extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ export class DefaultLayout extends Component {
           });
         }
       })
-      .catch(err => console.error("Axios Error :", err));
+      .catch(err => this.showNotfication(NOTIFICATION_TYPES.ERROR,"Oops something went wrong!"));
   }
 
   addToMarkers = body => {
@@ -47,7 +48,7 @@ export class DefaultLayout extends Component {
           this.setState({ markers: res.data, viewMode: VIEWMODES.NORMAL_MODE });
         }
       })
-      .catch(err => console.error("Axios Error :", err));
+      .catch(err => this.showNotfication(NOTIFICATION_TYPES.ERROR,"Oops something went wrong!"));
   };
   onRemoveMarker = (item, index) => {
     deleteMarker(item) //call deleteMarker API
@@ -56,12 +57,18 @@ export class DefaultLayout extends Component {
           this.setState({ markers: res.data });
         }
       })
-      .catch(err => console.error("Axios Error :", err));
+      .catch(err => this.showNotfication(NOTIFICATION_TYPES.ERROR,"Oops something went wrong!"));
   };
   onEditMarker = (item, index) => {
     this.setState({
       viewMode: VIEWMODES.EDIT_MODE,
       edittingMarker: { index, ...item }
+    });
+  };
+  showNotfication = (type, message, desc) => {
+    notification[type]({
+      message: message || undefined,
+      description: desc || undefined
     });
   };
   onEditConfirm = item => {
@@ -75,7 +82,7 @@ export class DefaultLayout extends Component {
           });
         }
       })
-      .catch(err => console.error("Axios Error :", err));
+      .catch(err => this.showNotfication(NOTIFICATION_TYPES.ERROR,"Oops something went wrong!"));
   };
   toggleViewMode = () => this.setState({ viewMode: VIEWMODES.ADD_MODE });
   onItemClick = focusLoc => this.setState({ focusLoc });
