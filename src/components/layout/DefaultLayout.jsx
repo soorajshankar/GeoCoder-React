@@ -14,7 +14,7 @@ import {
 import { VIEWMODES, FOCUS_LOC, NOTIFICATION_TYPES } from "../../constants";
 import { config } from "../../config/appConfig";
 import FindAddress from "../findAddress";
-import { notification, message } from "antd";
+import { notification } from "antd";
 
 export class DefaultLayout extends Component {
   constructor(props) {
@@ -37,18 +37,42 @@ export class DefaultLayout extends Component {
           });
         }
       })
-      .catch(err => this.showNotfication(NOTIFICATION_TYPES.ERROR,"Oops something went wrong!"));
+      .catch(err =>
+        this.showNotfication(
+          NOTIFICATION_TYPES.ERROR,
+          "Oops something went wrong!"
+        )
+      );
   }
+  findMarker = (body, markers) =>
+    markers.find(i => i.lat === body.lat && i.lat === body.lat);
 
   addToMarkers = body => {
+    const { markers } = this.state;
+    const isExist = this.findMarker(body, markers);
+    if (isExist)
+      return this.showNotfication(
+        "error",
+        "Marker already exist!",
+        `${body.name} already exist`
+      );
     //Call addMarker API
     addMarker(body)
       .then(res => {
         if (res.status === 200) {
-          this.setState({ markers: res.data, viewMode: VIEWMODES.NORMAL_MODE });
+          this.setState({
+            markers: res.data,
+            viewMode: VIEWMODES.NORMAL_MODE,
+            focusLoc: body
+          });
         }
       })
-      .catch(err => this.showNotfication(NOTIFICATION_TYPES.ERROR,"Oops something went wrong!"));
+      .catch(err =>
+        this.showNotfication(
+          NOTIFICATION_TYPES.ERROR,
+          "Oops something went wrong!"
+        )
+      );
   };
   onRemoveMarker = (item, index) => {
     deleteMarker(item) //call deleteMarker API
@@ -57,7 +81,12 @@ export class DefaultLayout extends Component {
           this.setState({ markers: res.data });
         }
       })
-      .catch(err => this.showNotfication(NOTIFICATION_TYPES.ERROR,"Oops something went wrong!"));
+      .catch(err =>
+        this.showNotfication(
+          NOTIFICATION_TYPES.ERROR,
+          "Oops something went wrong!"
+        )
+      );
   };
   onEditMarker = (item, index) => {
     this.setState({
@@ -82,7 +111,12 @@ export class DefaultLayout extends Component {
           });
         }
       })
-      .catch(err => this.showNotfication(NOTIFICATION_TYPES.ERROR,"Oops something went wrong!"));
+      .catch(err =>
+        this.showNotfication(
+          NOTIFICATION_TYPES.ERROR,
+          "Oops something went wrong!"
+        )
+      );
   };
   toggleViewMode = () => this.setState({ viewMode: VIEWMODES.ADD_MODE });
   onItemClick = focusLoc => this.setState({ focusLoc });
@@ -125,7 +159,6 @@ export class DefaultLayout extends Component {
               searchAddress={searchAddress} //ensuring component is not having side effects
               onClose={() => this.setState({ viewMode: VIEWMODES.NORMAL_MODE })}
               onSubmit={item => {
-                console.log({ item, edittingMarker });
                 this.onEditConfirm({ ...edittingMarker, ...item });
               }}
             />
