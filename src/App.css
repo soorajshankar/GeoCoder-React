@@ -73,6 +73,7 @@
 }
 .c-list__card {
   max-width: 250px;
+  width: 250px;
   padding: 5px;
   box-sizing: border-box;
   font-size: 13px;

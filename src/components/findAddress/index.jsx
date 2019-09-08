@@ -31,16 +31,23 @@ export const FindAddress = props => {
   );
   const onSearch = () => {
     searchValue &&
-      props.searchAddress(searchValue, country).then((resp, err) => {
-        setIsFetching(false);
-        if (err) return;
-        setSuggestions(resp.data.data || []);
-        setvalidationMessage(
-          resp.data.data && resp.data.data.length
-            ? undefined
-            : "No Results found"
-        );
-      });
+      props
+        .searchAddress(searchValue, country)
+        .then((resp, err) => {
+          setIsFetching(false);
+          if (err) return;
+          setSuggestions(resp.data.data || []);
+          setvalidationMessage(
+            resp.data.data && resp.data.data.length
+              ? undefined
+              : "No Results found"
+          );
+        })
+        .catch(e => {
+          setIsFetching(false);
+          setSuggestions([]);
+          setvalidationMessage("Oops Something went wrong !");
+        });
     setIsFetching(true);
   };
   const onEnterSearch = e => e.key === "Enter" && onSearch();
