@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Input, Button, Row, Col, Card, Alert, Select } from "antd";
+import { Modal, Input, Button, Row, Col, Alert, Select } from "antd";
 import { COUNTRY_CODES } from "../../helpers/map-helpers";
 const InputGroup = Input.Group;
 const { Option } = Select;
@@ -43,14 +43,14 @@ export const FindAddress = props => {
       });
     setIsFetching(true);
   };
-  const onEnterSearch = e => e.key == "Enter" && onSearch();
+  const onEnterSearch = e => e.key === "Enter" && onSearch();
 
   return (
     <Modal
       className="find-address"
       title={"Add Marker"}
       visible
-      onOk={() => console.log("OK")}
+      // onOk={() => console.log("OK")}
       onCancel={props.onClose}
       footer={[null]}
     >
@@ -58,8 +58,10 @@ export const FindAddress = props => {
         <Col span={19}>
           <InputGroup compact>
             <Select defaultValue={country} onChange={setCountry}>
-              {COUNTRY_CODES.map(i => (
-                <Select.Option value={i.code}>{i.name}</Select.Option>
+              {COUNTRY_CODES.map((i, index) => (
+                <Option key={index} value={i.code}>
+                  {i.name}
+                </Option>
               ))}
             </Select>
             <Input
@@ -74,7 +76,7 @@ export const FindAddress = props => {
         <Col span={5}>
           <Button
             type="primary"
-            icon={isFetching && "loading"}
+            icon={(isFetching && "loading") || undefined}
             onClick={onSearch}
           >
             Look Up

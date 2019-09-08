@@ -14,7 +14,6 @@ import {
 import { VIEWMODES, FOCUS_LOC } from "../../constants";
 import { config } from "../../config/appConfig";
 import FindAddress from "../findAddress";
-import MarkerModal from "../markerModal";
 
 export class DefaultLayout extends Component {
   constructor(props) {
