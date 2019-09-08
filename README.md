@@ -13,6 +13,13 @@
 - User should be able to add markers by clicking the "Add Marker" button on the top right side of the screen.
 - Add Marker Button will open a model with address search input and country picker dropdown.
 - User can add any `Google Map Geocoder API` validated address into the marker list.
+- Error handler will show the error notification if the marker is already there in the list.
+- After adding the marker map will be focused on the newly added marker.
+- Right side pane will have the list of markers.
+- By clicking on the `Marker name` user will be able to focus map onto the marker position.
+- User will be able to `Delete` any marker.
+- User will be able to `Edit` any marker using the `Geocoder API` validation.
+
   <!-- # Note fixed
   > Google map will show popup "This page can't load Google Maps correctly." because of the google map API developer trial plan limitations. -->
 
