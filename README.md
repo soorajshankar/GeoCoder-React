@@ -1,14 +1,26 @@
 # Geocoder Web Application
 
-> I have used native Google Maps-JS API to load map directly into the DOM (though there are custom-unofficial react components for google map, I am not using here )
-> React hooks and context API is used.
-> Map instance is kept inside React global context to make sure it is available throughout the application for future enhancements.
-> React Class Components, Functional Components are used across the applications.
-> Jest Unit Tests are written for all major components with trivial coverage.
-> For switching the map service provider, only helpers and generic map component needs to be modified. ( considering the competitor's like bing maps and azure maps are loading the map SDK through scrips)
+* I have used native Google Maps-JS API to load map directly into the DOM (though there are custom-unofficial react components for google map, I am not using here )
+* React hooks and context API is used.
+* Map instance is kept inside React global context to make sure it is available throughout the application for future enhancements.
+* React Class Components, Functional Components are used across the applications.
+* Jest Unit Tests are written for all major components with trivial coverage.
+* For switching the map service provider, only helpers and generic map component needs to be modified. ( considering the competitor's like bing maps and azure maps are loading the map SDK through scrips)
 
-# Note
-> Google map will show popup "This page can't load Google Maps correctly." because of the google map API developer trial plan limitations.
+# User Experience
+
+* User should be able to to load the page with saved markers.
+* User should be able to add markers by clicking the "Add Marker" Button on the top righ side of the screen 
+* Add Marker Button will open a model with address search input and country picker dropdown.
+* User can add any `Google Map Geocoder Api` validated address into the marker list.
+* Error handler will show the error notification if the marker is already there in the list.
+* After adding the marker map will be focused onto the newly added marker.
+* Right side pane will have the list of markers.
+* By clicking on the `Marker name` user will be able to to focus map onto the marker positon.
+* User will be able to `Delete` any marker.
+* User will be able to `Edit` any marker using the `Geocoder API` validation.
+<!-- # Note fixed 
+> Google map will show popup "This page can't load Google Maps correctly." because of the google map API developer trial plan limitations. -->
 
 ## Requirements
 
@@ -102,3 +114,4 @@ Reusable component as addMarker/EditMarker
 @name ,
 @lat ,
 @lng : form data
+ 
